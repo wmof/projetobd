@@ -57,7 +57,7 @@ KGK0012 VW                   Gol
 --5-Quais as revisões não autorizadas
 SELECT codigo, data, hora, carro_placa
 FROM revisao
-WHERE autorizacao = '0'
+WHERE autorizacao = '0';
 --Saida Prevista
 /*
     CODIGO DATA       HORA  CARRO_P
@@ -78,22 +78,53 @@ NOME
 WMOF SOLUTIONS
 */
 
---7-Quais os veiculos da marca “BMW” e modelo “Next” (Para informar sobre um possível recall)
-SELECT placa, marca, modelo, cliente_codigo
-FROM carro
-WHERE marca = 'BMW' AND modelo ='Next'
+--7-Quais os veiculos da marca “VW” e modelo “Gol” (Para informar sobre um possível recall por telefone)
+SELECT c.nome, c.telefone
+FROM cliente c
+WHERE 0 < (SELECT COUNT(*)
+FROM carro v
+WHERE v.cliente_codigo = c.codigo AND v.marca = 'VW' AND v.modelo = 'Gol');
+--Saida Prevista
+/*
+NOME
+--------------------------------------------------------------------------------
+TELEFONE
+---------------
+WMOF SOLUTIONS                                                                  
+(81) 3010-3977 
+*/
 
 --8-Quais os reboques com a distancia maior de 100km 
-SELECT codigo, data, hora, km, distancia, origem, destino, carro_placa
+SELECT data, hora, distancia, carro_placa
 FROM reboque
-WHERE distancia > 100
+WHERE distancia > 100;
+--Saida Prevista
+/*
+DATA       HORA   DISTANCIA CARRO_P
+---------- ----- ---------- -------
+04/06/2016 10:31        129 KIV0245
+*/
 
 --9-Quais os reboque não foram destinados a oficina
-SELECT codigo, data, hora, km, distancia, origem, destino, carro_placa
+SELECT data, hora, carro_placa
 FROM reboque
-WHERE destino<>oficina
+WHERE destino != 'oficina';
+--Saida Prevista
+/*
+DATA       HORA  CARRO_P
+---------- ----- -------
+06/06/2016 16:34 KIV0245
+*/
 
 --10-Quais revisões sem alinhamentos
-SELECT data, hora, km, carro_placa
-FROM revisao
-WHERE alinhamento = Null
+SELECT r.data, r.hora, r.carro_placa
+FROM revisao r
+WHERE NOT EXISTS (SELECT a.codigo_revisao
+FROM alinhamento a
+WHERE a.CODIGO_REVISAO = r.CODIGO);
+--Saida Prevista
+/*
+DATA       HORA  CARRO_P
+---------- ----- -------
+05/06/2016 17:32 KGK0012
+*/

@@ -99,7 +99,7 @@ commit;
 
 --Povoando tabelas
 
-
+--Cliente
 INSERT INTO cliente (codigo, nome, endereco, telefone)
 VALUES ('0001','Wellington', 'Rua: garanhuns, 45', '(81) 99376-0544');
 INSERT INTO cliente_fisica (cliente_codigo, cpf)
@@ -120,6 +120,7 @@ VALUES ('0004','Lairson', 'Av: Paulista, 11', '(81) 98988-0988');
 INSERT INTO cliente_fisica (cliente_codigo, cpf)
 VALUES ('0004','12345678901');
 
+--Carro
 INSERT INTO carro (placa, marca, modelo, cliente_codigo)
 VALUES ('KKL1519','Citroen','C4 pallas',0001);
 
@@ -135,6 +136,7 @@ VALUES ('KGK0012','VW','Gol',0003);
 INSERT INTO carro (placa, marca, modelo, cliente_codigo)
 VALUES ('KKW2723','Toyota','Corolla',0004);
 
+--Pagamento
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
 VALUES ('0001', '02/04/2016', '14:10', '79,90', '0001', 'KKL1519', '');
 
@@ -164,6 +166,7 @@ VALUES ('0010', '02/06/2016', '14:52', '79,90', '0003', 'KKK0001', '0009');
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
 VALUES ('0011', '02/06/2016', '14:52', '79,90', '0003', 'KKK0001', '0010');
 
+--Revisão
 INSERT INTO revisao (codigo, data, hora, km, relatorio, autorizacao, carro_placa)
 VALUES (0001, '12/04/2016', '15:30', '23000', 'Foi feito troca dos itens de 20mil km', '1', 'KKL1519');
 
@@ -175,6 +178,7 @@ VALUES (0003, '05/06/2016', '16:50', '32067', 'Foi feito troca dos itens de 20mi
 INSERT INTO revisao (codigo, data, hora, km, relatorio, autorizacao, carro_placa)
 VALUES (0004, '05/06/2016', '17:32', '29456', 'Foi feito troca dos itens de 30mil km + bateria', '1', 'KGK0012');
 
+--Alinhamento
 INSERT INTO alinhamento (codigo_revisao, observacoes)
 VALUES (0001,'Alinhemento FEITO, pouca diferença');
 
@@ -184,11 +188,7 @@ VALUES (0002,'Alinhemento FEITO, mas suspensão ruim');
 INSERT INTO alinhamento (codigo_revisao, observacoes)
 VALUES (0003,'Alinhemento FEITO, bastante diferença');
 
-INSERT INTO alinhamento (codigo_revisao, observacoes)
-VALUES (0004,'');
-
-
-
+--Reboque
 INSERT INTO reboque(codigo, data, hora, km, distancia, origem, destino, carro_placa)
 VALUES (0001, '04/06/2016', '10:31', '80789', 128.6, 'CARUARU-PE', 'oficina', 'KIV0245');
 
