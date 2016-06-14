@@ -1,9 +1,3 @@
---server  : oracle11g.cin.ufpe.br
---instance: Instance01
---username: u_wmof
---password: shdnaahs
---string para conexao: oracle11g_Instance01
-
 --1-Quais revisões foram feitas no dia 22/06/2016
 SELECT data, hora, carro_placa
 FROM revisao

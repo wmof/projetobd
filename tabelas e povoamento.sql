@@ -138,19 +138,19 @@ VALUES ('KKW2723','Toyota','Corolla',0004);
 
 --Pagamento
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
-VALUES ('0001', '02/04/2016', '14:10', '79,90', '0001', 'KKL1519', '');
+VALUES ('0001', '02/03/2016', '14:10', '79,90', '0001', 'KKL1519', '');
 
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
-VALUES ('0002', '03/05/2016', '12:19', '79,90', '0001', 'KKL1519', '0001');
+VALUES ('0002', '03/04/2016', '12:19', '79,90', '0001', 'KKL1519', '0001');
 
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
-VALUES ('0003', '01/06/2016', '09:00', '79,90', '0002', 'KIV0245', '');
+VALUES ('0003', '01/05/2016', '09:00', '79,90', '0002', 'KIV0245', '');
 
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
-VALUES ('0004', '01/06/2016', '11:45', '79,90', '0001', 'KKL1519', '0002');
+VALUES ('0004', '01/05/2016', '11:45', '79,90', '0001', 'KKL1519', '0002');
 
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
-VALUES ('0005', '03/06/2016', '08:10', '79,90', '0004', 'KKW2723', '');
+VALUES ('0005', '02/06/2016', '08:10', '79,90', '0004', 'KKW2723', '');
 
 INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)
 VALUES ('0006', '02/06/2016', '14:51', '79,90', '0003', 'KGK0012', '');
