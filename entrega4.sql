@@ -161,3 +161,27 @@ RETURN retorno;
 END valor_reboque;
 
 --TRIGGER para proibir a inserção de mais de 3 reboques por ANO
+CREATE OR REPLACE TRIGGER verifica_reb
+BEFORE INSERT ON reboque
+FOR EACH ROW
+DECLARE
+reb INT;
+BEGIN
+SELECT COUNT(*) INTO reb FROM reboque WHERE carro_placa = :NEW.carro_placa AND SUBSTR(data,-4,4) = (select to_char(sysdate, 'YYYY') from dual);
+IF reb >= 3 THEN
+RAISE_APPLICATION_ERROR( -20011, 'O Carro ja usou os 3 reboques anuais esse ano!!!');
+END IF;
+END;
+
+--TRIGGER para proibir a inserção de mais de 4 revisões por ANO
+CREATE OR REPLACE TRIGGER verifica_rev
+BEFORE INSERT ON revisao
+FOR EACH ROW
+DECLARE
+rev INT;
+BEGIN
+SELECT COUNT(*) INTO rev FROM revisao WHERE carro_placa = :NEW.carro_placa AND SUBSTR(data,-4,4) = (select to_char(sysdate, 'YYYY') from dual);
+IF rev >= 4 THEN
+RAISE_APPLICATION_ERROR( -20011, 'O Carro ja usou as 4 revisões anuais esse ano!!!');
+END IF;
+END;
