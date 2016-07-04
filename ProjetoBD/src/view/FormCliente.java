@@ -26,7 +26,7 @@ public class FormCliente extends javax.swing.JFrame {
         initComponents();
         try {
             this.setLocationRelativeTo(null);
-            modelo.setColumnIdentifiers(new String[]{"codigo", "nome", "telefone", "endereco"});
+            modelo.setColumnIdentifiers(new String[]{"Codigo", "Nome", "Telefone", "Endereço"});
             jTable1.setModel(modelo);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -71,6 +71,7 @@ public class FormCliente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -118,6 +119,13 @@ public class FormCliente extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Fechar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,13 +133,17 @@ public class FormCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,7 +155,8 @@ public class FormCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -170,6 +183,7 @@ public class FormCliente extends javax.swing.JFrame {
             cliente.setCodigo(modelo.getValueAt(selec, 0).toString());
             try {
                 banco.delete(cliente);
+                carregartabela(modelo);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
@@ -179,18 +193,27 @@ public class FormCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int selec = jTable1.getSelectedRow();
-        Cliente c = new Cliente();
-        modelo.getClass();
-        c.setCodigo(modelo.getValueAt(selec, 0).toString());
-        c.setNome(modelo.getValueAt(selec, 1).toString());
-        c.setTelefone(modelo.getValueAt(selec, 2).toString());
-        c.setEndereco(modelo.getValueAt(selec, 3).toString());
-        
-        AltCliente abrir = new AltCliente(c);
-        String codigo;
-        abrir.show();        
+        try {
+            int selec = jTable1.getSelectedRow();
+            Cliente c = new Cliente();
+            modelo.getClass();
+            c.setCodigo(modelo.getValueAt(selec, 0).toString());
+            c.setNome(modelo.getValueAt(selec, 1).toString());
+            c.setTelefone(modelo.getValueAt(selec, 2).toString());
+            c.setEndereco(modelo.getValueAt(selec, 3).toString());
+            
+            AltCliente abrir = new AltCliente(c);
+            String codigo;
+            abrir.show();
+            carregartabela(modelo);
+        } catch (Exception ex) {
+            Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +254,7 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

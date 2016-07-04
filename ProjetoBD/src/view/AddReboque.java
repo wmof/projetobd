@@ -173,6 +173,7 @@ public class AddReboque extends javax.swing.JFrame {
         reboque.setCarro(carro);
         try {
             banco.insert(reboque);
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(AddReboque.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

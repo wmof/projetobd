@@ -33,11 +33,10 @@ public class BdPagamento {
                     + pagamento.getCodigo() + ", '"
                     + pagamento.getData() + "', '"
                     + pagamento.getHora() + "', '"
-                    + pagamento.getValor() + "', '"
-                    + pagamento.getCarro().getCliente().getCodigo() + "', '"
+                    + "79,90" + "', "
+                    + pagamento.getCarro().getCliente().getCodigo() + ", '"
                     + pagamento.getCarro().getPlaca() + "',"
                     + valida + ")";
-            JOptionPane.showMessageDialog(null, sql);
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!!!");
 

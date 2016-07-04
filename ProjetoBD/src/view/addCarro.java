@@ -20,12 +20,12 @@ import object.Cliente;
  *
  * @author Leto
  */
-public class addCarro extends javax.swing.JFrame {
+public class AddCarro extends javax.swing.JFrame {
 
     /**
      * Creates new form addCarro
      */
-    public addCarro() throws Exception {
+    public AddCarro() throws Exception {
         initComponents();
         this.setLocationRelativeTo(null);
         DefaultComboBoxModel cbClienteModel = new DefaultComboBoxModel();
@@ -161,10 +161,11 @@ public class addCarro extends javax.swing.JFrame {
         BdCarro banco = new BdCarro();
         try {
             banco.insert(carro);
+            this.dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(addCarro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCarro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(addCarro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCarro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -193,23 +194,24 @@ public class addCarro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new addCarro().setVisible(true);
+                    new AddCarro().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(addCarro.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AddCarro.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

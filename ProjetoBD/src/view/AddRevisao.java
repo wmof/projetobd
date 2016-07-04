@@ -168,6 +168,7 @@ public class AddRevisao extends javax.swing.JFrame {
             revisao.setKm(jTextKm.getText());
             revisao.setAutorizacao(Integer.parseInt(jTextAutorizacao.getText()));
             banco.insert(revisao);
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(AddRevisao.class.getName()).log(Level.SEVERE, null, ex);
         }

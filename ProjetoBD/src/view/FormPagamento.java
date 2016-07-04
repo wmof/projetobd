@@ -109,6 +109,7 @@ public class FormPagamento extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboPlaca = new javax.swing.JComboBox();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -155,6 +156,13 @@ public class FormPagamento extends javax.swing.JFrame {
 
         jComboPlaca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton4.setText("Fechar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,10 +173,12 @@ public class FormPagamento extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jComboPlaca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -182,8 +192,9 @@ public class FormPagamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1)
-                    .addComponent(jComboPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jComboPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -191,7 +202,7 @@ public class FormPagamento extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            //carregartabela(model);
+            carregartabela(model);
         } catch (Exception ex) {
             Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -204,6 +215,7 @@ public class FormPagamento extends javax.swing.JFrame {
             pagamento.setCodigo(model.getValueAt(selec, 0).toString());
             try {
                 bdPag.delete(pagamento);
+                carregartabela(model);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
@@ -225,31 +237,43 @@ public class FormPagamento extends javax.swing.JFrame {
             Pagamento pagamento = new Pagamento();
             //Pegando o ultimo codigo do pagamento
             ArrayList<Pagamento> arr = new ArrayList<Pagamento>();
-            arr = bd.select();            
-            int cod = Integer.parseInt(arr.get(arr.size() - 1).getCodigo())+1; //Ultimo Codigo + 1
-            pagamento.setCodigo(cod+"");
+            arr = bd.select();
+            int cod = Integer.parseInt(arr.get(arr.size() - 1).getCodigo()) + 1; //Ultimo Codigo + 1
+            
             //Pegando o ultimo codigo do pagamento
             pagamento.setData(data);
             pagamento.setHora(hora);
-            pagamento.setValor(75.0);
             pagamento.setCarro(arrayCarro.get(jComboPlaca.getSelectedIndex()));
             String valida;
             valida = "";
             for (int i = 0; i < arr.size(); i++) {
+                //Pegar o ultimo codigo do pagamento
+                if (cod==Integer.parseInt(arr.get(i).getCodigo())){
+                    cod++;
+                }
                 if (arr.get(i).getCarro().getPlaca().equals(pagamento.getCarro().getPlaca())) {
                     valida = arr.get(i).getCodigo();
-                    
+
                 }
-                
+
             }
-            JOptionPane.showMessageDialog(null, valida);
+            pagamento.setCodigo(cod + "");
             bd.insert(pagamento, valida);
-            
+            try {
+                carregartabela(model);
+            } catch (Exception ex) {
+                Logger.getLogger(FormRevisao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(FormPagamento.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,6 +313,7 @@ public class FormPagamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboPlaca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

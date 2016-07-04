@@ -176,6 +176,7 @@ public class AddCliente extends javax.swing.JFrame {
         cpf = jTextCpf.getText();
         try {
             banco.insertFisica(cliente, cpf);
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(AddCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
