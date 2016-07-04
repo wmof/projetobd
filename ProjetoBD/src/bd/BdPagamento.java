@@ -98,5 +98,44 @@ public class BdPagamento {
         }
         return retorno;
     }
+    
+    public ArrayList<Pagamento> selectdev() throws Exception {
+        Conexao conn = new Conexao();
+        conn.conectar();
+        ArrayList<Pagamento> retorno = new ArrayList<Pagamento>();
+        String sql;
+        sql = "SELECT codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo FROM pagamento";
+        try {
+            Statement stmt = Conexao.con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Pagamento p = new Pagamento();
+                p.setCodigo(rs.getString("codigo"));
+                p.setData(rs.getString("data"));
+                p.setHora(rs.getString("hora"));
+                p.setValor(rs.getDouble("valor"));
+
+                Cliente cli = new Cliente();
+                cli.setCodigo(rs.getString("cliente_codigo"));
+                Carro car = new Carro();
+                car.setPlaca(rs.getString("carro_placa"));
+                car.setCliente(cli);
+                Pagamento pag = new Pagamento();
+                try {
+                    pag.setCodigo(rs.getString("valida_codigo"));
+                } catch (Exception e) {
+                    pag.setCodigo("0000");
+                }
+                p.setCarro(car);
+                p.setPagamento(pag);
+                retorno.add(p);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO SELECT" + e.getMessage());
+        }
+        return retorno;
+    }
 
 }

@@ -38,7 +38,7 @@ public class Conexao {
             con = ds.getConnection(user, password);//conexao recebe os parametros de usuario e senha
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Conexao Erro"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Conecte a VPN");
         }
 
     }

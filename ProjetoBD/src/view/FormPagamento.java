@@ -94,6 +94,7 @@ public class FormPagamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERRO" + ex.getMessage());
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

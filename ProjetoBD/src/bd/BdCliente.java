@@ -119,4 +119,26 @@ public class BdCliente {
         }
         return retorno;
     }
+    public ArrayList<Cliente> selectDevedores() throws Exception {
+        Conexao conn = new Conexao();
+        conn.conectar();
+        ArrayList<Cliente> retorno = new ArrayList<Cliente>();
+        String sql;
+        sql = "SELECT nome, telefone FROM pag_atrasado";
+        try {
+            Statement stmt = Conexao.con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            Cliente c = new Cliente();
+                c.setNome(rs.getString("nome"));
+                c.setTelefone(rs.getString("telefone"));
+                retorno.add(c);
+
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return retorno;
+    }
 }
