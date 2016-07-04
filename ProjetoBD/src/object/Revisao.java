@@ -15,7 +15,7 @@ public class Revisao {
     private String hora;
     private String km;
     private String relatorio;
-    private String autorizacao;
+    private int autorizacao;
     private Carro carro;
 
     /**
@@ -89,20 +89,6 @@ public class Revisao {
     }
 
     /**
-     * @return the autorizacao
-     */
-    public String getAutorizacao() {
-        return autorizacao;
-    }
-
-    /**
-     * @param autorizacao the autorizacao to set
-     */
-    public void setAutorizacao(String autorizacao) {
-        this.autorizacao = autorizacao;
-    }
-
-    /**
      * @return the carro
      */
     public Carro getCarro() {
@@ -114,5 +100,19 @@ public class Revisao {
      */
     public void setCarro(Carro carro) {
         this.carro = carro;
+    }
+
+    /**
+     * @return the autorizacao
+     */
+    public int getAutorizacao() {
+        return autorizacao;
+    }
+
+    /**
+     * @param autorizacao the autorizacao to set
+     */
+    public void setAutorizacao(int autorizacao) {
+        this.autorizacao = autorizacao;
     }
 }

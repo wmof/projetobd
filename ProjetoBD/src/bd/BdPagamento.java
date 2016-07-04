@@ -20,22 +20,24 @@ import object.Cliente;
  * @author Leto
  */
 public class BdPagamento {
-    
-    public static void insert(Pagamento pagamento) throws SQLException, IOException {
+
+    public static void insert(Pagamento pagamento, String valida) throws SQLException, IOException {
         try {
             Conexao conn = new Conexao();
             conn.conectar();
             Statement stmt = Conexao.con.createStatement();
             String sql;
+            
             sql = "INSERT INTO pagamento (codigo, data, hora, valor, cliente_codigo, carro_placa, valida_codigo)"
-                    + " VALUES('"
-                    + pagamento.getCodigo() + "','"
-                    + pagamento.getData()+ "','"
-                    + pagamento.getHora() + "','"
-                    + pagamento.getValor() + "','"
-                    + pagamento.getCarro().getCliente().getCodigo() + "','"
-                    + pagamento.getCarro().getPlaca() + "','"
-                    + pagamento.getPagamento().getCodigo() + "');";
+                    + " VALUES ("
+                    + pagamento.getCodigo() + ", '"
+                    + pagamento.getData() + "', '"
+                    + pagamento.getHora() + "', '"
+                    + pagamento.getValor() + "', '"
+                    + pagamento.getCarro().getCliente().getCodigo() + "', '"
+                    + pagamento.getCarro().getPlaca() + "',"
+                    + valida + ")";
+            JOptionPane.showMessageDialog(null, sql);
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!!!");
 
@@ -50,7 +52,7 @@ public class BdPagamento {
             conn.conectar();
             Statement stmt = Conexao.con.createStatement();
             String sql;
-            sql = "DELETE pagamento WHERE codigo = '" + pagamento.getCodigo() + "');";
+            sql = "DELETE pagamento WHERE codigo = '" + pagamento.getCodigo() + "'";
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados deletados com sucesso!!!");
 
@@ -59,7 +61,6 @@ public class BdPagamento {
         }
     }
 
-    
     public ArrayList<Pagamento> select() throws Exception {
         Conexao conn = new Conexao();
         conn.conectar();
@@ -69,12 +70,13 @@ public class BdPagamento {
         try {
             Statement stmt = Conexao.con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            Pagamento p = new Pagamento();
             while (rs.next()) {
+                Pagamento p = new Pagamento();
                 p.setCodigo(rs.getString("codigo"));
                 p.setData(rs.getString("data"));
                 p.setHora(rs.getString("hora"));
                 p.setValor(rs.getDouble("valor"));
+
                 Cliente cli = new Cliente();
                 cli.setCodigo(rs.getString("cliente_codigo"));
                 Carro car = new Carro();
@@ -86,15 +88,16 @@ public class BdPagamento {
                 } catch (Exception e) {
                     pag.setCodigo("0000");
                 }
+                p.setCarro(car);
                 p.setPagamento(pag);
                 retorno.add(p);
 
             }
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERRO SELECT" + e.getMessage());
         }
         return retorno;
     }
-    
+
 }
